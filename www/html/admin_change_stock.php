@@ -10,6 +10,18 @@ if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
 
+//hiddenで送られてきた$tokenの取得
+$token = get_post('token');
+
+//トークンの照合チェック
+if(is_valid_csrf_token($token) === false){
+  redirect_to(LOGIN_URL);
+}
+
+//トークンの破棄
+unset($_SESSION['csrf_token']);
+
+
 $db = get_db_connect();
 
 $user = get_login_user($db);

@@ -17,6 +17,17 @@ if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
 
+//トークンの取得
+$token = get_post('token');
+
+//トークンの照会チェック
+if(is_valid_csrf_token($token) === false){
+  redirect_to(LOGIN_URL);
+}
+
+//トークンの破棄
+unset($_SESSION['csrf_token']);
+
 //PODを取得
 $db = get_db_connect();
 
