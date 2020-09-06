@@ -30,5 +30,12 @@ if(is_admin($user) === false){
 
 //商品一覧用の商品データを取得
 $items = get_all_items($db);
+
+//トークン作成
+// このget_csrf_token()では戻り値$tokenが返される。そしたらそれを受け止める変数が必要。$token作ってそれに入れてあげる。
+$token = get_csrf_token();
+
 //viewフォルダのadmin.phpの読み込み
 include_once VIEW_PATH . '/admin_view.php';
+
+

@@ -9,6 +9,20 @@ session_start();
 if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
+//hidenで送られたトークンの取得
+$token = get_post('token');
+//トークンの照合チェック
+//is_valid_csrf_token()でtrueかfalseが返ってくる
+//trueの時はis_valid_csrf_token($token) === flseまで読み込まれるが、falseでは無いのでL17のif文の処理は行われずジャンプして下の次の処理に続いていく。
+//falseのときはif文の処理が行われてリダイレクトされる
+//この書き方でtrue,falseどちらも調べられている。
+if(is_valid_csrf_token($token) === false){
+  redirect_to(LOGIN_URL);
+}
+
+//トークンの破棄
+unset($_SESSION['csrf_token']);
+
 
 $db = get_db_connect();
 
