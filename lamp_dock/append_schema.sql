@@ -13,5 +13,6 @@ CREATE TABLE `detail` (
   `item_id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
