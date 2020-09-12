@@ -24,11 +24,12 @@ unset($_SESSION['csrf_token']);
 
 
 $db = get_db_connect();
+//ログインしているユーザーを識別して、その人のusersテーブルの情報を取得して、返す。
 $user = get_login_user($db);
 
 $cart_id = get_post('cart_id');
 $amount = get_post('amount');
-
+//カートの中に入っている個数を変更
 if(update_cart_amount($db, $cart_id, $amount)){
   set_message('購入数を更新しました。');
 } else {

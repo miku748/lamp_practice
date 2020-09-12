@@ -11,8 +11,9 @@ if(is_logined() === false){
 }
 
 $db = get_db_connect();
+//ログインしているユーザーを識別して、その人のusersテーブルの情報を取得して、返す。
 $user = get_login_user($db);
-
+//itemsテーブルのステータスが１のレコードを全て取得
 $items = get_open_items($db);
 
 //トークンの生成

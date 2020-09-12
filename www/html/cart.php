@@ -12,10 +12,11 @@ if(is_logined() === false){
 }
 
 $db = get_db_connect();
+//ログインしているユーザーを識別して、その人のusersテーブルの情報を取得して、返す。
 $user = get_login_user($db);
-
+//cartとitemのuserid結合テーブルからログイン中のuserの情報を取得
 $carts = get_user_carts($db, $user['user_id']);
-
+//カート内の商品合計金額
 $total_price = sum_carts($carts);
 
 //トークンの作成

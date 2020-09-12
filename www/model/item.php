@@ -85,6 +85,10 @@ function regist_item_transaction($db, $name, $price, $stock, $status, $image, $f
 
 //itemsテーブルに商品を追加する
 function insert_item($db, $name, $price, $stock, $filename, $status){
+    //   define('PERMITTED_ITEM_STATUSES', array(
+    //   'open' => 1,
+    //   'close' => 0,
+    // ));
   $status_value = PERMITTED_ITEM_STATUSES[$status];
   $sql = "
     INSERT INTO
