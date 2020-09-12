@@ -21,9 +21,10 @@ if(is_logined() === false){
 $db = get_db_connect();
 
 //PDOを取得してログインユーザーのデータを取得
+//ログインしているユーザーを識別して、その人のusersテーブルの情報を取得して、返す。
 $user = get_login_user($db);
 
-
+//ユーザーのタイプか１かどうかチェックしている？1ならTRUE、そうでなければfalseを返す
 if(is_admin($user) === false){
   redirect_to(LOGIN_URL);
 }
