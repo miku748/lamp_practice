@@ -133,4 +133,3 @@ function get_detail($db, $purchase_id){
 }
 
 
-
