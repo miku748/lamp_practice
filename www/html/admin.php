@@ -25,6 +25,8 @@ $db = get_db_connect();
 $user = get_login_user($db);
 
 //ユーザーのタイプか１かどうかチェックしている？1ならTRUE、そうでなければfalseを返す
+//is_admin()管理者１だったらtrueが返る
+//この場合、一般ユーザーのときfalseでログイン画面にリダイレクト
 if(is_admin($user) === false){
   redirect_to(LOGIN_URL);
 }
