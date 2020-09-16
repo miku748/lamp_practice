@@ -76,4 +76,61 @@ $db->beginTransaction();
 }
 
 
+//購入履歴のpurchaseテーブルを取得
+//一般ユーザーは、ログイン中ユーザーの購入履歴を表示
+//管理者は全ての購入履歴を表示
+//新しい順で表示
+//この関数をコントローラーで呼び出す前にユーザータイプを取っておく１か２か
+function get_purchase($db, $user){
+  $sql = '
+    SELECT
+      purchase_id,
+      created,
+      total
+    FROM
+      purchase
+  ';
+  //ログインユーザーが一般なら
+  if($user['type'] === 2) {
+    $sql .= '
+      WHERE
+        user_id = :user_id
+    ';
+    $array = array(':user_id'=>$user['user_id']);
+  }
+  $sql .= '
+      ORDER BY created DESC
+    ';
+  //レコードを取得
+  return fetch_all_query($db, $sql, $array);
+}
+
+
+//detailテーブルを取得する
+//商品名を表示させたいので、itemsテーブルもジョインしたものを取得したい
+//引数の$purchase_idにはコントローラーで$purchase_id=get_post('perchase_id');で取ってきたものを入れる
+function get_detail($db, $purchase_id){
+  $sql = '
+    SELECT
+      detail.purchase_id,
+      detail.item_id,
+      detail.price,
+      detail.amount,
+      items.name
+    FROM
+      detail
+    JOIN
+      items
+    ON
+      detail.item_id = items.item_id
+    WHERE
+      purchase_id = :purchase_id
+  ';
+
+  $array = array(':purchase_id'=>$purchase_id);
+
+  return fetch_all_query($db, $sql, $array);
+}
+
+
 

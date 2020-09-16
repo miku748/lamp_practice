@@ -23,6 +23,7 @@ if(is_valid_csrf_token($token) === false){
 //トークンの破棄
 unset($_SESSION['csrf_token']);
 
+//PDOを取得
 $db = get_db_connect();
 //ログインしているユーザーを識別して、その人のusersテーブルの情報を取得して、返す。
 $user = get_login_user($db);

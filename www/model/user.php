@@ -75,8 +75,11 @@ function regist_user($db, $name, $password, $password_confirmation) {
 }
 
 //ユーザーのタイプか１かどうかチェックしている？1ならTRUE、そうでなければfalseを返す
+//ログインユーザーが管理者adminか一般sampleuserかチェック
 function is_admin($user){
   //define('USER_TYPE_ADMIN', 1);
+  //define('USER_TYPE_NORMAL', 2);
+  //ちなみに、上記より管理者が１
   return $user['type'] === USER_TYPE_ADMIN;
 }
 
